@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  app:
+    build: .
+    command: npm start
+    container_name: api-libquality
+    ports:
+      - '3000:3000'
+    volumes:
+      - /usr/app
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: mongo-libquality
+    restart: always
+    volumes:
+      - ./data:/data/db
+    ports:
+      - '27017:27017'
